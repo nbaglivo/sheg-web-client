@@ -1,5 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -13,6 +19,7 @@ import userReducer from './reducers/user';
 import App from './components/app';
 import Login from './components/login';
 import UserHome from './components/userhome';
+
 
 // Redirects to /login by default
 const UserIsAuthenticated = UserAuthWrapper({
