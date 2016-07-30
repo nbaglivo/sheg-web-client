@@ -10,8 +10,7 @@
     "type": "git",
     "url": "https://github.com/nbaglivo/pasae-cli.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Nicolás Baglivo <nicolas.baglivo@gmail.com> (http://github.com/nbaglivo)",
   "license": "MIT",
   "bugs": {
@@ -41,6 +40,7 @@
     "react-router": "^2.0.1",
     "react-router-redux": "^4.0.0",
     "redux": "^3.3.1",
+    "redux-auth-wrapper": "^0.6.0",
     "redux-observable": "^0.7.2",
     "redux-thunk": "^2.0.1",
     "rxjs": "^5.0.0-beta.6"
