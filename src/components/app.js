@@ -8,7 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const muiTheme = getMuiTheme({
 	palette: {
 		primary1Color: red700,
-		primary2Color: red500,
+		primary2Color: pinkA200,
 		secondary1Color: pinkA200,
 	},
 	appBar: {
@@ -16,12 +16,15 @@ const muiTheme = getMuiTheme({
 	},
 });
 
+const style = {
+	height: '100%'
+}
+
 const App = ({ pushPath, children }) => (
-	<div>
+	<div style={style}>
 		<MuiThemeProvider muiTheme={muiTheme}>
-		    <main>      
-			  	<AppBar title="Pasae Client" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
-			    {children}
+		    <main style={style}>
+			    { children }
 		    </main>
 		</MuiThemeProvider>
 	</div>

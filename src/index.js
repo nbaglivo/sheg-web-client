@@ -9,7 +9,7 @@ injectTapEventPlugin();
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import { Router, browserHistory, Route, IndexRoute } from 'react-router';
+import { Router, browserHistory, Route, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware, routerActions } from 'react-router-redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
@@ -30,6 +30,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 
 const routes = (
 	<Route path="/" component={App}>
+		<IndexRedirect to="/login" />
 		<Route path="login" component={Login}/>
 		<Route path="home" component={UserIsAuthenticated(UserHome)}/>
 	</Route>
