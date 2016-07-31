@@ -17,7 +17,7 @@ import { UserAuthWrapper } from 'redux-auth-wrapper';
 import userReducer from './reducers/user';
 
 import App from './components/app';
-import Login from './components/login';
+import Login from './containers/login';
 import UserHome from './components/userhome';
 
 
