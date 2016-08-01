@@ -13,17 +13,15 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  /*resolve: {
-        alias: {
-            'rxjs': 'rxjs-es'
-        }
-    },*/
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       exclude: [/node_modules/],
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
