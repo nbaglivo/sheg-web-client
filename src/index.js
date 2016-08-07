@@ -8,7 +8,6 @@ injectTapEventPlugin();
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
 import { Router, browserHistory, Route, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware, routerActions } from 'react-router-redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
@@ -43,7 +42,7 @@ const reducer = combineReducers({
 
 const store = createStore(
 	reducer,
-	applyMiddleware(thunkMiddleware, routerMiddleware(browserHistory))
+	applyMiddleware(routerMiddleware(browserHistory))
 );
 
 const history = syncHistoryWithStore(browserHistory, store)
