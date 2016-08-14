@@ -14,6 +14,9 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 import userReducer from './reducers/user';
+import authReducer from './reducers/auth';
+
+import { loginEpic }  from './actions/auth';
 
 import App from './components/app';
 import Login from './containers/login';
@@ -37,13 +40,16 @@ const routes = (
 
 const reducer = combineReducers({
 	user: userReducer,
+	auth: authReducer,
 	routing: routerReducer
 });
 
-const store = createStore(
-	reducer,
-	applyMiddleware(routerMiddleware(browserHistory))
-);
+
+const epicMiddleware = createEpicMiddleware(combineEpics(loginEpic));
+
+const middlewares = applyMiddleware(routerMiddleware(browserHistory), epicMiddleware);
+
+const store = createStore(reducer, middlewares);
 
 const history = syncHistoryWithStore(browserHistory, store)
 

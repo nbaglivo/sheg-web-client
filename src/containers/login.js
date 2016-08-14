@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Login from '../components/login';
+import { signIn } from '../actions/auth';
 
-// TODO: dispatch action
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onSubmitForm: ({email, password}) => console.log('submit email=%O, password=%O', email, password),
+		onSubmitForm: ({email, password}) => dispatch(signIn(email, password)),
 	}
 }
 
