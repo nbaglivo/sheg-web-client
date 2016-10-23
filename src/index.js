@@ -13,10 +13,9 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware, routerActions } 
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 
-import userReducer from './reducers/user';
 import authReducer from './reducers/auth';
 
-import { loginEpic }  from './actions/auth';
+import { loginEpic, redirectToHomeEpic }  from './actions/auth';
 
 import App from './components/app';
 import Login from './containers/login';
@@ -25,7 +24,7 @@ import UserHome from './components/userhome';
 
 // Redirects to /login by default
 const UserIsAuthenticated = UserAuthWrapper({
-	authSelector: state => state.user.toJS(), // how to get the user state
+	authSelector: state => state.auth.get('token'), // how to get the user state
 	redirectAction: routerActions.replace, // the redux action to dispatch for redirect
 	wrapperDisplayName: 'UserIsAuthenticated'
 });
@@ -39,13 +38,13 @@ const routes = (
 )
 
 const reducer = combineReducers({
-	user: userReducer,
 	auth: authReducer,
 	routing: routerReducer
 });
 
 
-const epicMiddleware = createEpicMiddleware(combineEpics(loginEpic));
+const epics = combineEpics(loginEpic, redirectToHomeEpic);
+const epicMiddleware = createEpicMiddleware(epics);
 
 const middlewares = applyMiddleware(routerMiddleware(browserHistory), epicMiddleware);
 
