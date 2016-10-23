@@ -9,9 +9,9 @@ const style = {
 	}
 }
 
-const UserHome = () => (
+const UserHome = ({onLogout}) => (
 	<div>
-		<AppBar title="Pasae Cli" style={style.appbar} iconElementRight={<FlatButton label="Logout" />}/>
+		<AppBar title="Pasae Cli" style={style.appbar} iconElementRight={<FlatButton onClick={onLogout} label="Logout" />}/>
 		<Tabs>
 			<Tab label="Perfil" >
 				<div>TODO Perfil</div>

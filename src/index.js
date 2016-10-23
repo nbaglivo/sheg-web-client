@@ -15,11 +15,11 @@ import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 import authReducer from './reducers/auth';
 
-import { loginEpic, redirectToHomeEpic }  from './actions/auth';
+import { authEpics, signInSuccess }  from './actions/auth';
 
 import App from './components/app';
 import Login from './containers/login';
-import UserHome from './components/userhome';
+import Home from './containers/home';
 
 
 // Redirects to /login by default
@@ -33,7 +33,7 @@ const routes = (
 	<Route path="/" component={App}>
 		<IndexRedirect to="/login" />
 		<Route path="login" component={Login}/>
-		<Route path="home" component={UserIsAuthenticated(UserHome)}/>
+		<Route path="home" component={UserIsAuthenticated(Home)}/>
 	</Route>
 )
 
@@ -42,15 +42,18 @@ const reducer = combineReducers({
 	routing: routerReducer
 });
 
-
-const epics = combineEpics(loginEpic, redirectToHomeEpic);
-const epicMiddleware = createEpicMiddleware(epics);
+const epicMiddleware = createEpicMiddleware(authEpics);
 
 const middlewares = applyMiddleware(routerMiddleware(browserHistory), epicMiddleware);
 
 const store = createStore(reducer, middlewares);
 
 const history = syncHistoryWithStore(browserHistory, store)
+
+const authToken = localStorage.getItem('authToken');
+if (authToken) {
+	store.dispatch(signInSuccess({access_token: authToken}));
+}
 
 render(
 	<Provider store={store}>

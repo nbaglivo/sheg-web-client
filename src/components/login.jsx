@@ -67,11 +67,11 @@ const Button = ({label}) => (
 );
 
 const FormTab = ({label, onSubmit}) => (
-		<Form style={style.form} onValidSubmit={onSubmit}>
-			<FormsyText name="email" hintText="Email" validations="isEmail" required validationError="Invalid format" style={style.textField}/>
-			<FormsyText name="password" hintText="Password" validations="isWords" required type="password" validationError="This field is required" style={style.textField}/>
-			<Button label={label}/>
-		</Form>
+	<Form style={style.form} onValidSubmit={onSubmit}>
+		<FormsyText name="email" hintText="Email" validations="isEmail" required validationError="Invalid format" style={style.textField}/>
+		<FormsyText name="password" hintText="Password" validations="isWords" required type="password" validationError="This field is required" style={style.textField}/>
+		<Button label={label}/>
+	</Form>
 );
 
 const Login = ({onSubmitForm}) => (

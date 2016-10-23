@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import { SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT_SUCCESS } from '../actions/auth';
+import { SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT } from '../actions/auth';
 
 const initialState = Immutable.fromJS({token: undefined});
 
@@ -12,7 +12,7 @@ const authReducer = (state = initialState, action) => {
 				'token': action.access_token,
 				'errorMessage': undefined
 			});
-		case SIGN_OUT_SUCCESS:
+		case SIGN_OUT:
 			localStorage.removeItem('authToken');
 			return state.set('token', undefined);
 		case SIGN_IN_ERROR:
