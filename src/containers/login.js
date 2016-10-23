@@ -8,6 +8,6 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-const noop = () => {};
+const noop = () => ({});
 
 export default connect(noop, mapDispatchToProps)(Login);
