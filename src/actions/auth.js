@@ -41,10 +41,6 @@ const reqHeaders = () => ({
 	'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
 });
 
-const reqBody = () => ({
-	'access_token': localStorage.getItem('authToken')
-});
-
 const domain = 'http://localhost:8080/';
 
 const token_url = domain + 'oauth/token';
@@ -66,19 +62,21 @@ const logoutRequest = () => ({
 });
 
 const loginEpic = action$ => (
-	action$.ofType(SIGN_IN_REQUEST)
-	.mergeMap(action =>
-		ajax(loginRequest(action))
-		.map(signInSuccess)
-		.catch(error => Observable.of(loginError(error)))
-	)
+	action$
+		.ofType(SIGN_IN_REQUEST)
+		.mergeMap(action =>
+			ajax(loginRequest(action))
+			.map(signInSuccess)
+			.catch(error => Observable.of(loginError(error)))
+		)
 );
 
 const logoutEpic = action$ => (
-	action$.ofType(SIGN_OUT)
-	.mergeMap(action =>
-		ajax(logoutRequest())
-	)
+	action$
+		.ofType(SIGN_OUT)
+		.mergeMap(action =>
+			ajax(logoutRequest())
+		)
 );
 
 const redirectToHomeEpic = action$ => (
