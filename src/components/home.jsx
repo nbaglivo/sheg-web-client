@@ -10,7 +10,7 @@ import { routerActions } from 'react-router-redux'
 
 
 const MDTabs = VisibleOnlyMD(() => (
-	<Tabs>
+	<Tabs>	
 		<Tab label="Inicio">
 			<div>TODO Perfil</div>
 		</Tab>
@@ -21,7 +21,7 @@ const MDTabs = VisibleOnlyMD(() => (
 ));
 
 const AdminTabs = VisibleOnlyAdmin(() => (
-	<Tabs>
+	<Tabs>	
 		<Tab label="Inicio">
 			<div>TODO Perfil</div>
 		</Tab>
