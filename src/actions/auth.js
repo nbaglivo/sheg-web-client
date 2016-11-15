@@ -14,6 +14,7 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_OUT = 'SIGN_OUT';
+export const CURRENT_USER_FETCHED = 'CURRENT_USER_FETCHED';
 
 export const loginError = (error) => ({ type: SIGN_IN_ERROR, error });
 export const signIn = (email, password) => ({ type: SIGN_IN_REQUEST, email, password });
@@ -84,4 +85,8 @@ const redirectToHomeEpic = action$ => (
 	action$.ofType(SIGN_IN_SUCCESS).map(() => push('/home'))
 );
 
-export const authEpics = combineEpics(loginEpic, redirectToHomeEpic, logoutEpic);
+const fetchUserEpic = action$ => (
+	action$.ofType(SIGN_IN_SUCCESS).map(() => ({type: CURRENT_USER_FETCHED}))
+);
+
+export const authEpics = combineEpics(loginEpic, redirectToHomeEpic, logoutEpic, fetchUserEpic);

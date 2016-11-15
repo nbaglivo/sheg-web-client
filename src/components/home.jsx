@@ -1,26 +1,44 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
 
-const style = {
-	appbar: {
-		boxShadow: 'none'
-	}
-}
+import AppBar from '../containers/appbar';
 
-const UserHome = ({onLogout}) => (
+import { VisibleOnlyAdmin, VisibleOnlyMD } from '../util/wrappers';
+
+import { routerActions } from 'react-router-redux'
+
+
+const MDTabs = VisibleOnlyMD(() => (
+	<Tabs>
+		<Tab label="Inicio">
+			<div>TODO Perfil</div>
+		</Tab>
+		<Tab label="Pacientes">
+			<div>TODO Enfermedad</div>
+		</Tab>
+	</Tabs>
+));
+
+const AdminTabs = VisibleOnlyAdmin(() => (
+	<Tabs>
+		<Tab label="Inicio">
+			<div>TODO Perfil</div>
+		</Tab>
+		<Tab label="ADMIN">
+			<div>TODO Enfermedad</div>
+		</Tab>
+	</Tabs>
+));
+
+const Home = () => (
 	<div>
-		<AppBar title="Pasae Cli" style={style.appbar} iconElementRight={<FlatButton onClick={onLogout} label="Logout" />}/>
-		<Tabs>
-			<Tab label="Perfil" >
-				<div>TODO Perfil</div>
-			</Tab>
-			<Tab label="Enfermedad">
-				<div>TODO Enfermedad</div>
-			</Tab>
-		</Tabs>
+		<AppBar />
+		<div>
+			<MDTabs />
+			<AdminTabs />
+		</div>
 	</div>
-)
+);
 
-export default UserHome;
+export default Home;

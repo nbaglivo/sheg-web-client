@@ -12,6 +12,7 @@ import { Router, browserHistory, Route, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware, routerActions } from 'react-router-redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
+import createLogger from 'redux-logger';
 
 import authReducer from './reducers/auth';
 
@@ -19,15 +20,16 @@ import { authEpics, signInSuccess }  from './actions/auth';
 
 import App from './components/app';
 import Login from './containers/login';
-import Home from './containers/home';
+import Home from './components/home';
 
 
 // Redirects to /login by default
 const UserIsAuthenticated = UserAuthWrapper({
-	authSelector: state => state.auth.get('token'), // how to get the user state
+	authSelector: state => state.auth.get('current_user'), // how to get the user state
 	redirectAction: routerActions.replace, // the redux action to dispatch for redirect
-	wrapperDisplayName: 'UserIsAuthenticated'
+	wrapperDisplayName: 'UserIsAuthenticatedCORNUDO'
 });
+
 
 const routes = (
 	<Route path="/" component={App}>
@@ -44,15 +46,17 @@ const reducer = combineReducers({
 
 const epicMiddleware = createEpicMiddleware(authEpics);
 
-const middlewares = applyMiddleware(routerMiddleware(browserHistory), epicMiddleware);
+const logger = createLogger();
+
+const middlewares = applyMiddleware(routerMiddleware(browserHistory), epicMiddleware, logger);
 
 const store = createStore(reducer, middlewares);
 
 const history = syncHistoryWithStore(browserHistory, store)
 
 const authToken = localStorage.getItem('authToken');
-if (authToken) {
-	store.dispatch(signInSuccess({access_token: authToken}));
+if ('authToken') {
+	store.dispatch(signInSuccess({access_token: 'authToken'}));
 }
 
 render(
