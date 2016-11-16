@@ -8,6 +8,7 @@ import { ajax } from 'rxjs/observable/dom/ajax';
 import { Observable } from 'rxjs';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { noact } from '../util';
+import { HOST, CREDENTIALS } from 'config';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -24,13 +25,10 @@ export const signUp = (email, password) => ({ type: SIGN_UP_REQUEST, email, pass
 export const signUpSuccess = () => ({ type: SIGN_UP_SUCCESS });
 export const signOut = () => ({ type: SIGN_OUT });
 
-
-const credentials = 'my-client-with-secret:secret';
-
 //TODO: Use passwd and email
 const headers = (pass, email) => ({
 	'Accept': 'application/json',
-	'Authorization': 'Basic ' + btoa(credentials),
+	'Authorization': 'Basic ' + btoa(CREDENTIALS),
 	'Content-Type': 'application/x-www-form-urlencoded'
 });
 
@@ -43,9 +41,7 @@ const reqHeaders = () => ({
 	'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
 });
 
-const domain = 'http://localhost:8080/';
-
-const token_url = domain + 'oauth/token';
+const token_url = HOST + 'oauth/token';
 
 const loginRequest = ({pass, email}) => ({
 	url: token_url,
@@ -57,7 +53,7 @@ const loginRequest = ({pass, email}) => ({
 });
 
 const logoutRequest = () => ({
-	url: domain + 'logout',
+	url: HOST + 'logout',
 	headers: reqHeaders(),
 	crossDomain: true,
 	method: 'POST'
@@ -95,3 +91,4 @@ const fetchUserEpic = action$ => (
 );
 
 export const authEpics = combineEpics(loginEpic, redirectToHomeEpic, redirectToLogin, logoutEpic, fetchUserEpic);
+
