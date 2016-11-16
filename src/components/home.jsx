@@ -8,25 +8,29 @@ import { VisibleOnlyAdmin, VisibleOnlyMD } from '../util/wrappers';
 
 import { routerActions } from 'react-router-redux'
 
+const style = {
+	padding: '20px',
+	'text-align':'center'
+}
 
 const MDTabs = VisibleOnlyMD(() => (
 	<Tabs>	
-		<Tab label="Inicio">
-			<div>TODO Perfil</div>
+		<Tab label="Home">
+			<div style={style}>Home del médico.</div>
 		</Tab>
 		<Tab label="Pacientes">
-			<div>TODO Enfermedad</div>
+			<div style={style}>Pacientes del médico.</div>
 		</Tab>
 	</Tabs>
 ));
 
 const AdminTabs = VisibleOnlyAdmin(() => (
 	<Tabs>	
-		<Tab label="Inicio">
-			<div>TODO Perfil</div>
+		<Tab label="Home">
+			<div style={style}>Home del admin.</div>
 		</Tab>
-		<Tab label="ADMIN">
-			<div>TODO Enfermedad</div>
+		<Tab label="Pacientes">
+			<div style={style}>Todos los pacientes.</div>
 		</Tab>
 	</Tabs>
 ));
