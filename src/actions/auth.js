@@ -86,8 +86,12 @@ const redirectToHomeEpic = action$ => (
 	action$.ofType(SIGN_IN_SUCCESS).map(() => push('/home'))
 );
 
+const redirectToLogin = action$ => (
+	action$.ofType(SIGN_OUT).map(() => push('/login'))
+);
+
 const fetchUserEpic = action$ => (
 	action$.ofType(SIGN_IN_SUCCESS).map(() => ({type: CURRENT_USER_FETCHED}))
 );
 
-export const authEpics = combineEpics(loginEpic, redirectToHomeEpic, logoutEpic, fetchUserEpic);
+export const authEpics = combineEpics(loginEpic, redirectToHomeEpic, redirectToLogin, logoutEpic, fetchUserEpic);
