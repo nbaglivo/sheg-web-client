@@ -10,7 +10,11 @@ import { routerActions } from 'react-router-redux'
 
 const style = {
 	padding: '20px',
-	'text-align':'center'
+	textAlign:'center'
+}
+
+const paperStyle = {
+	height: 'calc(100% - 30px)'
 }
 
 const MDTabs = VisibleOnlyMD(() => (
@@ -36,12 +40,12 @@ const AdminTabs = VisibleOnlyAdmin(() => (
 ));
 
 const Home = () => (
-	<div>
+	<div style={paperStyle}>
 		<AppBar />
-		<div>
+		<Paper style={paperStyle}>
 			<MDTabs />
 			<AdminTabs />
-		</div>
+		</Paper>
 	</div>
 );
 

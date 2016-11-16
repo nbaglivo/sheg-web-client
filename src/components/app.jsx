@@ -11,7 +11,7 @@ const muiTheme = getMuiTheme({
 		secondary1Color: pinkA200,
 	},
 	appBar: {
-		height: 75,
+		height: 56,
 	},
 });
 
