@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { Observable } from 'rxjs';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { noact } from '../util';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -22,6 +23,7 @@ export const signInSuccess = ({access_token}) => ({ type: SIGN_IN_SUCCESS, acces
 export const signUp = (email, password) => ({ type: SIGN_UP_REQUEST, email, password });
 export const signUpSuccess = () => ({ type: SIGN_UP_SUCCESS });
 export const signOut = () => ({ type: SIGN_OUT });
+
 
 const credentials = 'my-client-with-secret:secret';
 
@@ -76,6 +78,7 @@ const logoutEpic = action$ => (
 		.ofType(SIGN_OUT)
 		.mergeMap(action =>
 			ajax(logoutRequest())
+			.catch(error => Observable.of(noact()))
 		)
 );
 
